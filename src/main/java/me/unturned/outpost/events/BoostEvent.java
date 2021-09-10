@@ -38,11 +38,12 @@ public class BoostEvent implements Event {
         }
 
         final Instant end = Instant.now().plus(15, ChronoUnit.MINUTES);
+        Bukkit.broadcastMessage(Util.colour("&aA boost is happening at the Mob Outpost!"));
+
         new BukkitRunnable() {
 
             @Override
             public void run() {
-                Bukkit.broadcastMessage(Util.colour("&aA boost is happening at the Mob Outpost!"));
 
                 // Begin mini boss
                 if (DurationUtil.isOver(end)) {
@@ -58,7 +59,7 @@ public class BoostEvent implements Event {
                     if (key.isDead()) {
                         toRemove.add(key);
                     }
-                    else if (Duration.between(Instant.now(), mob.getLastAttacked()).getSeconds() > 20) { // If the mob hasn't been attacked in 20 seconds
+                    else if (Duration.between(mob.getLastAttacked(), Instant.now()).getSeconds() > 20) { // If the mob hasn't been attacked in 20 seconds
                         key.remove();
                         toRemove.add(key);
                     }
@@ -71,8 +72,9 @@ public class BoostEvent implements Event {
                 // Find location to spawn
                 final ArrayList<Block> blocks = outpostRegion.getBlocks();
 
-                if (blocks.isEmpty())
+                if (blocks.isEmpty()) {
                     return;
+                }
 
                 outpost.getServer().getScheduler().runTask(outpost, () -> {
                     Block block = blocks.get(new Random().nextInt(blocks.size()));
