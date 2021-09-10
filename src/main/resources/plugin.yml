@@ -2,6 +2,7 @@ name: Outpost
 version: 1.0-BETA
 main: me.unturned.outpost.Outpost
 authors: [Unturned]
+depend: [Vault]
 
 commands:
   outpost:
