@@ -14,7 +14,7 @@ public record PlayerMobDamageListener(Outpost outpost) implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         if (!(event.getDamager() instanceof Player)) return;
-        if (outpost.getSpawnedMobs().containsKey(event.getEntity())) return;
+        if (!(outpost.getSpawnedMobs().containsKey(event.getEntity()))) return;
 
         final Entity entity = event.getEntity();
         outpost.getSpawnedMobs().get(entity).setLastAttacked(Instant.now());
