@@ -47,7 +47,7 @@ public class MobSpawnTask extends BukkitRunnable {
             if (key.isDead()) {
                 toRemove.add(key);
             }
-            else if (Duration.between(Instant.now(), mob.getLastAttacked()).getSeconds() > 20) {
+            else if (Duration.between(mob.getLastAttacked(), Instant.now()).getSeconds() > 20) {
                 key.remove();
                 toRemove.add(key);
             }
@@ -59,7 +59,10 @@ public class MobSpawnTask extends BukkitRunnable {
 
         // Find location to spawn
         final ArrayList<Block> blocks = outpostRegion.getBlocks();
-        if (blocks.isEmpty()) return;
+
+        if (blocks.isEmpty()) {
+            return;
+        }
 
         outpost.getServer().getScheduler().runTask(outpost, () -> {
             Block block = blocks.get(new Random().nextInt(blocks.size()));
