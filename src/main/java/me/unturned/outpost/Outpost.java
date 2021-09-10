@@ -1,6 +1,7 @@
 package me.unturned.outpost;
 
 import me.unturned.outpost.commands.OutpostCommand;
+import me.unturned.outpost.events.listeners.BossDamageListener;
 import me.unturned.outpost.listeners.PlayerMobDamageListener;
 import me.unturned.outpost.listeners.PlayerMobKillListener;
 import me.unturned.outpost.objects.Mob;
@@ -41,6 +42,7 @@ public class Outpost extends JavaPlugin {
         // Listeners
         getServer().getPluginManager().registerEvents(new PlayerMobDamageListener(this), this);
         getServer().getPluginManager().registerEvents(new PlayerMobKillListener(this), this);
+        getServer().getPluginManager().registerEvents(new BossDamageListener(), this);
 
         // Tasks
         new LoadMobRewardsTask(this).runTask(this);
