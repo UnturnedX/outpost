@@ -57,14 +57,15 @@ public class MobSpawnTask extends BukkitRunnable {
 
         if (outpost.getSpawnedMobs().size() > 23) return;
 
-        // Find location to spawn
-        final ArrayList<Block> blocks = outpostRegion.getBlocks();
-
-        if (blocks.isEmpty()) {
-            return;
-        }
-
         outpost.getServer().getScheduler().runTask(outpost, () -> {
+
+            // Find location to spawn
+            final ArrayList<Block> blocks = outpostRegion.getBlocks();
+
+            if (blocks.isEmpty()) {
+                return;
+            }
+
             Block block = blocks.get(new Random().nextInt(blocks.size()));
             block = block.getLocation().getWorld().getHighestBlockAt(block.getLocation()); // get the highest block of found location
 
