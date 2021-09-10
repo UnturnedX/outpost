@@ -34,6 +34,7 @@ public class BossEvent implements Event {
         boss.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 3));
         boss.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 1));
         boss.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(400);
+        boss.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1.0);
 
         boss.setMetadata("boss", new FixedMetadataValue(outpost, true));
 
