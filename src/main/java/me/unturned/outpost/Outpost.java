@@ -4,6 +4,7 @@ import me.unturned.outpost.commands.OutpostCommand;
 import me.unturned.outpost.events.listeners.BossDamageListener;
 import me.unturned.outpost.listeners.PlayerMobDamageListener;
 import me.unturned.outpost.listeners.PlayerMobKillListener;
+import me.unturned.outpost.objects.Config;
 import me.unturned.outpost.objects.Mob;
 import me.unturned.outpost.objects.region.SpawnRegion;
 import me.unturned.outpost.tasks.LoadBoostsTask;
@@ -54,8 +55,10 @@ public class Outpost extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getConfig().set("boosts", scheduledBoosts.stream().map(Instant::toEpochMilli).collect(Collectors.toCollection(ArrayList::new)));
-        saveConfig();
+        final Config config = new Config(this, "config.yml");
+
+        config.set("boosts", scheduledBoosts.stream().map(Instant::toEpochMilli).collect(Collectors.toCollection(ArrayList::new)))
+              .save();
     }
 
     public boolean isBoostTime() {
