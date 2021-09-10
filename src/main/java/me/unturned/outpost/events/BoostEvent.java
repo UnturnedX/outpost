@@ -69,14 +69,15 @@ public class BoostEvent implements Event {
 
                 if (outpost.getSpawnedMobs().size() > 43) return;
 
-                // Find location to spawn
-                final ArrayList<Block> blocks = outpostRegion.getBlocks();
-
-                if (blocks.isEmpty()) {
-                    return;
-                }
-
                 outpost.getServer().getScheduler().runTask(outpost, () -> {
+
+                    // Find location to spawn
+                    final ArrayList<Block> blocks = outpostRegion.getBlocks();
+
+                    if (blocks.isEmpty()) {
+                        return;
+                    }
+
                     Block block = blocks.get(new Random().nextInt(blocks.size()));
                     block = block.getLocation().getWorld().getHighestBlockAt(block.getLocation());
 
